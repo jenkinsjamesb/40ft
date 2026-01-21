@@ -21,7 +21,8 @@ clean:
 
 # Image build and pull targets
 build:
-	podman build . --secret id=40ft_password,src=.secrets/40ft_password -t localhost/40ft:latest
+	./build.sh
+	podman build . --secret src=.secrets/40ft_password -t localhost/40ft:latest
 
 pull:
 	podman pull quay.io/centos-bootc/centos-bootc:c9s

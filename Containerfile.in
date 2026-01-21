@@ -1,0 +1,3 @@
+FROM quay.io/centos-bootc/centos-bootc:c9s
+
+#include "buildfile"
