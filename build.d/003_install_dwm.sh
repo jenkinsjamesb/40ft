@@ -1,19 +1,25 @@
-dnf install -y libXft-devel libXinerama-devel fontpackages-devel # dwm prerequisites
-dnf install -y git gcc gdb vim # dev tools
+dnf install -y git gcc libX11-devel libX11 libXft-devel libXinerama-devel fontpackages-devel # dwm prerequisites
 
 dnf groupinstall -y "X Window System"
-dnf install -y lightdm open-vm-tools gnome-terminal epel-release
+dnf install -y xorg-x11-server-Xorg
 
+# Build dwm
+rm -rf /tmp/dwm
+git clone https://git.suckless.org/dwm /tmp/dwm
+cd /tmp/dwm && make clean install
 
-if [ -d dwm ]
-then
-   rm -rf dwm
-fi
+# Build dmenu
+rm -rf /tmp/dmenu
+git clone https://git.suckless.org/dmenu /tmp/dmenu
+cd /tmp/dmenu && make clean install
 
-git clone https://git.suckless.org/dwm
+# Build st
+rm -rf /tmp/st
+git clone https://git.suckless.org/dmenu /tmp/st
+cd /tmp/st && make clean install
 
-cd dwm
+# Set profile to start X automatically
+echo "[[ -z \"\$DISPLAY\" && \$(tty) = /dev/tty1 ]] && startx" > /etc/profile
 
-make
-make install
-systemctl enable lightdm
+# Start dwm on startx
+echo "exec dwm" > /home/user/.xinitrc
