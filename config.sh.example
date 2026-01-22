@@ -1,2 +1,2 @@
-40ft_user="user"
-40ft_password="password"
+export user="user"
+export pass="password"
