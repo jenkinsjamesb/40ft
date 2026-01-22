@@ -17,4 +17,3 @@ cd dwm
 make
 make install
 systemctl enable lightdm
-systemctl set-default lightdm.target
