@@ -1,9 +1,6 @@
-all: secret pull build
+device="/dev/null"
 
-# Dumps contents of .secrets into podman secrets, overwriting if needed
-secret:
-	for secret in $$(find ./.secrets -mindepth 1); do \
-		podman secret create --replace=true $$(basename $$secret) $$secret ; done
+all: pull build
 
 install:
 	podman run \
@@ -13,7 +10,7 @@ install:
 	-v /var/lib/containers:/var/lib/containers \
 	--security-opt label=type:unconfined_t \
 	localhost/40ft \
-	bootc install to-disk /path/to/disk
+	bootc install to-disk ${device}
 
 # Stop and remove all images
 clean:
@@ -21,8 +18,7 @@ clean:
 
 # Image build and pull targets
 build:
-	./build.sh
-	podman build . --secret src=.secrets/40ft_password -t localhost/40ft:latest
+	bash build.sh
 
 pull:
 	podman pull quay.io/centos-bootc/centos-bootc:c9s
