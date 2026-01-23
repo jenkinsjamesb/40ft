@@ -1,4 +1,4 @@
-dnf install -y git gcc libX11-devel libX11 libXft-devel libXinerama-devel fontpackages-devel # dwm prerequisites
+dnf install -y git gcc libX11-devel libX11 libXft-devel libXinerama-devel libXrandr libXrandr-devel fontpackages-devel # dwm prerequisites
 
 dnf groupinstall -y "X Window System"
 dnf install -y xorg-x11-server-Xorg xorg-x11-xinit
