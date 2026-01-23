@@ -6,12 +6,12 @@ dnf install -y xorg-x11-server-Xorg xorg-x11-xinit
 # Build dwm
 rm -rf /tmp/dwm
 git clone https://git.suckless.org/dwm /tmp/dwm
+(cd /tmp/dmenu && cp ./config.def.h ./config.h && sed -i -e 's/Mod1Mask/Mod4Mask/g' ./config.h) # Edit config.h to set Win as mod
 (cd /tmp/dwm && make clean install)
 
 # Build dmenu
 rm -rf /tmp/dmenu
 git clone https://git.suckless.org/dmenu /tmp/dmenu
-(cd /tmp/dmenu && cp ./config.def.h ./config.h && sed -i -e 's/Mod1Mask/Mod4Mask/g' ./config.h) # Edit config.h to set Win as mod
 (cd /tmp/dmenu && make clean install)
 
 # Build slock
