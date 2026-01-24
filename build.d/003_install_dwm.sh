@@ -6,7 +6,7 @@ dnf install -y xorg-x11-server-Xorg xorg-x11-xinit
 # Build dwm
 rm -rf /tmp/dwm
 git clone https://git.suckless.org/dwm /tmp/dwm
-(cd /tmp/dmenu && cp ./config.def.h ./config.h && sed -i -e 's/Mod1Mask/Mod4Mask/g' ./config.h) # Edit config.h to set Win as mod
+(cd /tmp/dwm && cp ./config.def.h ./config.h && sed -i -e 's/Mod1Mask/Mod4Mask/g' ./config.h) # Edit config.h to set Win as mod
 (cd /tmp/dwm && make clean install)
 
 # Build dmenu
@@ -28,4 +28,4 @@ git clone https://git.suckless.org/st /tmp/st
 echo "[[ -z \"\$DISPLAY\" && \$(tty) = /dev/tty1 ]] && startx" > /etc/profile
 
 # Start dwm on startx
-echo "exec dwm" > /home/user/.xinitrc # TODO add date to status bar (https://dwm.suckless.org/status_monitor/)
+echo "exec dwm" > /home/$(cat /run/secrets/user)/.xinitrc # TODO add date to status bar (https://dwm.suckless.org/status_monitor/)
